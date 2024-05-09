@@ -11,6 +11,9 @@ Service will try to send email
 1. immediately after being received if possible (not other email is being sent at that moment)
 2. once all emails have been processed after a <SEND_EMAILS_DELAY> seconds delay the service will process again any stored emails
 
+## Important - Multiple emails with exact same content
+Emails are stored once, based on their hash of from, to, subject, body and smtp server. If multiple emails with the exact same cotent arrive before the first one is sent they will just update the existing one.
+
 ## Usages
 1. send email to multiple smtp server (For example a local one that stores to file/db/ and a remote one for actual sending)
 2. overrile to/from settings per smtp sender and re-route emails from/to different addresses
