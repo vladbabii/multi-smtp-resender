@@ -6,17 +6,31 @@ SMTP server that distributes a copy of each received email to a list of smtp ser
 * Docker Hub: https://hub.docker.com/repository/docker/vladbabii0/multi-smtp-resender/general
 
 
-## Configuration per SMTP target
+## Nodemailer Configuration per SMTP target
 See the docker-compose.yaml file for a simple example
 
 Use https://www.nodemailer.com/ as a reference for configuration options.
 
 Examples
 ```
-SMTP_1={"host":"ms1","port":2500,"secure":false,"_id":"local"}
+SMTP_1={"host":"ms1","port":2500,"secure":false,...}
 ```
 
-## Service configuration
+## Service Specific per SMTP target
+```
+SMTP_1={...,"_id":"name","_from":"from@example.com","_to":"to@example.com"}
+```
+where
+* _id
+ * set identifier for smtp server
+ * defaults to numerical part of env variable: SMTP_1 -> _id = 1
+ * storage path will be storage/<value of _id>/
+* _from and _to
+ * will override from/to on emails sent via this specific smtp sender
+ * will append {{from <original from email address>}} and/or {{to <original to email address>}} to subject line
+
+
+## Service Specific Environment Variables
 ```
 STORAGE=storage
 MAX_TRIES=0
