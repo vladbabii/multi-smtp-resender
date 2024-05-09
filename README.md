@@ -1,10 +1,22 @@
 # Multi SMTP Resender
-
-SMTP server that distributes a copy of each received email to a list of smtp servers.
-
 * Github: https://github.com/vladbabii/multi-smtp-resender
 * Docker Hub: https://hub.docker.com/repository/docker/vladbabii0/multi-smtp-resender/general
 
+## Description
+SMTP server that distributes a copy of each received email to a list of smtp servers.
+
+## General flow
+When a new mail is received, an outbound email will be stored for each smtp server in storage/<smtp id>/<hash of data>.json file
+Service will try to send email 
+1. immediately after being received if possible (not other email is being sent at that moment)
+2. once all emails have been processed after a <SEND_EMAILS_DELAY> seconds delay the service will process again any stored emails
+
+## Usages
+1. send email to multiple smtp server (For example a local one that stores to file/db/ and a remote one for actual sending)
+2. overrile to/from settings per smtp sender and re-route emails from/to different addresses
+3. local email buffer since the service stores local emails on disk and it retries sending them - so if you have a another service that sends emails without retries you could use this to store and later send those emails
+4. mount storage folder and write json files for each email with another service to avoid implementing smtp protocol in that service
+5. ... use your imagination ?
 
 ## Nodemailer Configuration per SMTP target
 See the docker-compose.yaml file for a simple example
