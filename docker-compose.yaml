@@ -11,3 +11,5 @@ services:
       - "25:25"
     environment:
       - SMTP_1={"host":"ms1","port":2500,"secure":false,"_id":"local"}
+    volumes:
+      - "./local_storage:/home/node/app/storage"
