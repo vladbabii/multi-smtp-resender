@@ -22,12 +22,12 @@ SMTP_1={...,"_id":"name","_from":"from@example.com","_to":"to@example.com"}
 ```
 where
 * _id
- * set identifier for smtp server
- * defaults to numerical part of env variable: SMTP_1 -> _id = 1
- * storage path will be storage/<value of _id>/
+  * set identifier for smtp server
+  * defaults to numerical part of env variable: SMTP_1 -> _id = 1
+  * storage path will be storage/<value of _id>/
 * _from and _to
- * will override from/to on emails sent via this specific smtp sender
- * will append {{from <original from email address>}} and/or {{to <original to email address>}} to subject line
+  * will override from/to on emails sent via this specific smtp sender
+  * will append {{from <original from email address>}} and/or {{to <original to email address>}} to subject line
 
 
 ## Service Specific Environment Variables
