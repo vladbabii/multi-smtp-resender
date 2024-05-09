@@ -62,3 +62,30 @@ where
   * how much time should the service wait before retrying sending an email to a specific sender
 * SEND_EMAILS_DELAY
   * every <SEND_EMAILS_DELAY> the folder will be scanned and emails will be sent where possilbe
+
+## Email JSON file format
+
+File should be written in compact JSON format with .json extension
+```
+{"from":"from@exmaple.com","to":"to@example.com","subject":"test","text":"This is a test email","_":{"received":1715242577,"tries":0,"nextTryTimestamp":0}}
+```
+
+This is in pretty json format for easier reading (do NOT write it like this to file)
+```
+{
+    "from": "from@exmaple.com",
+    "to": "to@example.com",
+    "subject": "test",
+    "text": "This is a test email",
+    "_": {
+        "received": 1715242577,
+        "tries": 0,
+        "nextTryTimestamp": 0
+    }
+}
+```
+where
+* received - timestamp in seconds when email was generated
+* tries - number of times the mail has been tried to be sent
+* nextTryTimestamp - email should only be sent after this specific time passes
+
