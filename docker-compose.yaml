@@ -6,7 +6,7 @@ services:
       - "8085:8085"
 
   msr:
-    image: vladbabii0/multi-smtp-resender:1.0.0
+    image: vladbabii0/multi-smtp-resender:1.0.1
     ports:
       - "25:25"
     environment:
