@@ -52,6 +52,8 @@ STORAGE=storage
 MAX_TRIES=0
 RETRY_DELAY=20
 SEND_EMAILS_DELAY=5
+SMTP_PORT=25
+SUBJECT_ALTER=1
 ```
 where
 * STORAGE
@@ -64,6 +66,12 @@ where
   * how much time should the service wait before retrying sending an email to a specific sender
 * SEND_EMAILS_DELAY
   * every <SEND_EMAILS_DELAY> the folder will be scanned and emails will be sent where possilbe
+* SMTP_PORT
+ * default 25
+ * port to listen on for incoming email
+* SUBJECT_ALTER
+ * default 1
+ * when set to 0 the subject will not be updated with from/to values
 
 ## Email JSON file format
 
