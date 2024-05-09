@@ -18,9 +18,11 @@ Service will try to send email
 4. mount storage folder and write json files for each email with another service to avoid implementing smtp protocol in that service
 5. ... use your imagination ?
 
-## Nodemailer Configuration per SMTP target
-See the docker-compose.yaml file for a simple example
+## How to run
+1. docker - see the [docker-compose.yaml](docker-compose.yaml) file for a simple example
+2. copy index.js and package* files then run npm install and npm run start
 
+## Nodemailer Configuration per SMTP target
 Use https://www.nodemailer.com/ as a reference for configuration options.
 
 Examples
