@@ -1,0 +1,13 @@
+services:
+  ms1:
+    image: adampresley/mailslurper:latest
+    ports:
+      - "8081:8080"
+      - "8085:8085"
+
+  msr:
+    image: vladbabii0/multi-smtp-resender:1.0.0
+    ports:
+      - "25:25"
+    environment:
+      - SMTP_1={"host":"ms1","port":2500,"secure":false,"_id":"local"}
