@@ -5,6 +5,14 @@ const fs = require('fs');
 const crypto = require('crypto');
 const { send } = require('process');
 
+var smtpPort = process.env.SMTP_PORT || '25';
+smtpPort = parseInt(smtpPort);
+console.log('Using smtp port [',smtpPort,']');
+
+var subjectAlter = process.env.SUBJECT_ALTER || '1';
+subjectAlter = parseInt(subjectAlter);
+console.log('Using subject alter [',subjectAlter,']');
+
 const storagePath = process.env.STORAGE || "storage";
 console.log('Using storage path [',storagePath,']');
 
@@ -72,8 +80,8 @@ const server = new SMTPServer({
   }
 });
 
-server.listen(25, () => {
-  console.log('SMTP server started on port 25');
+server.listen(smtpPort, () => {
+  console.log('SMTP server started on port'+smtpPort);
 });
 
 server.on("error", (err) => {
@@ -91,11 +99,15 @@ async function storeEmail(emailData) {
   for (const smtpServer of smtpServers) {
     let theEmail=JSON.parse(JSON.stringify(parsedEmail));
     if(typeof(smtpServer._from) === 'string'){
-      theEmail.subject = theEmail.subject + ' {{from '+theEmail.from+'}}';
+      if(subjectAlter>0){
+        theEmail.subject = theEmail.subject + ' {{from '+theEmail.from+'}}';
+      }
       theEmail.from = smtpServer._from;
     }
     if(typeof(smtpServer._to) === 'string'){
-      theEmail.subject = theEmail.subject + ' {{to '+theEmail.to+'}}';
+      if(subjectAlter>0){
+        theEmail.subject = theEmail.subject + ' {{to '+theEmail.to+'}}';
+      }
       theEmail.to = smtpServer._to;
     }
     const hash = crypto.createHash('sha1').update(JSON.stringify(theEmail)).digest('hex');
