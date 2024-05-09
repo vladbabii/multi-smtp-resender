@@ -14,6 +14,8 @@ Use https://www.nodemailer.com/ as a reference for configuration options.
 Examples
 ```
 SMTP_1={"host":"ms1","port":2500,"secure":false,...}
+SMTP_2={"host":"mail.your-server.de","port":465,"secure":true,"auth":{"user":"your_email@your_domain.example.com","pass":"your_smtp_password"},"_from":"your_email@your_domain.example.com","_id":"external_sender"}
+
 ```
 
 ## Service Specific per SMTP target
